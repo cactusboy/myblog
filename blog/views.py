@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import  HttpResponse
+from django.shortcuts import get_object_or_404, render
+# from django.http import  HttpResponse
 from .models import Post
 # Create your views here.
 
@@ -12,3 +12,8 @@ def index(request):
         'welcome': '欢迎访问我的博客首页',
         'post_list': post_list
     })
+
+
+def detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/detail.html', context={'post':post})

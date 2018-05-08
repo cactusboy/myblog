@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils.six import python_2_unicode_compatible
 # python_2_unicode_compatible 装饰器用于兼容 Python2
 
@@ -48,5 +49,10 @@ class Post(models.Model):  # 文章表
 
     def __str__(self):
         return self.title
+
+    # 自定义 get_absolute_url方法
+    # 记得从 django.urls 中导入 reverse 函数
+    def get_absolute_url(self):
+        return reverse('blog:detail', kwargs={'pk':self.pk})
 
 
